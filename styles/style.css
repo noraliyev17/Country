@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+ }
+ 
+body.active .header{
+    background: #2B3844;
+
+}
+
+body.active {
+background: #202C36;
+    
+}
+ 
+body.active .header-text{
+    color: white;
+}
+
+body.active .card {
+    background: #2B3844;
+
+}
+
+.body.active .card-title{
+    color: white;
+}
+.body.active .card-list-item{
+    color: white;
+}
+
+.body.active #region{
+    background: #2B3844;
+    color:#ffffff;
+}
+
+.body.active .form-control{
+    background: #2B3844;
+  
+}
+.body.active .form-control::placeholder{
+    color:#ffffff;
+}
+
+.body.active .bdy{
+    color:#ffffff;
+}
+
+.body.active .qnl{
+    color:#ffffff;
+}
+
+
+ .wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill , minmax(264px, 1fr));
+    gap: 75px;
+ }
+ 
+ .card{
+    max-height: 336px;
+ }
+ 
+ .card-top-img{
+    height: 160px;
+    min-width: 267px !important; 
+ }
+
+
+ .btn_n {
+    background: #2B3844;
+
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    height: 30px;
+    width: 60px;
+    font-weight: bolder;
+  /* border: none;11 */
+  border: 2px solid #ffffff;
+  }
+  
+  .btn_l {
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    height: 30px;
+    width: 60px;
+    font-weight: bolder;
+  }
+  .buttons {
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: 780px;
+  }
