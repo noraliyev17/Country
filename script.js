@@ -6,12 +6,16 @@ const baseURL = "https://restcountries.com/v2";
 const getAllCountries = async () => {
    const countries = await fetch(`${baseURL}/all`);
    const result = await countries.json();
-   dataRender(result)
+
+   setTimeout(() => {
+      $('.wrapper').innerHTML = ""
+      dataRender(result)
+   }, 2000);
+   $('.wrapper').innerHTML = `<span class="loader"></span>`;
    dynamicCategory(result)
 }
 
 getAllCountries()
-
 // -------------- ALL COUNTRIES end--------------------------- 
 
 
@@ -31,8 +35,14 @@ function dataRender(data = []) {
             <li class="card-list-item list-unstyled"><strong>Population: </strong> ${el.population} </li>
             <li class="card-list-item list-unstyled"><strong>Region: </strong> ${el.region} </li>
             <li class="card-list-item list-unstyled"><strong>Capital: </strong> ${el.capital} </li>
-         </ul>
+   
+            </ul>
+            <button class="btn btn-primary" data-id="${el.name}">More 🔎</button>
+
+
       </div>`);
+
+      card.dataset.id = el.name;
 
       $(".wrapper").appendChild(card);
 
@@ -145,4 +155,88 @@ $(".btn_n").addEventListener("click",()=> {
 
 $(".btn_l").addEventListener("click",()=> {
     $("body").classList.remove("active");
+})
+
+
+
+// read more***************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('.wrapper').addEventListener('click', (e) => {
+   $('.country-info').innerHTML = "";
+   console.log(e.target);
+   if (e.target.classList.contains('btn-primary')) {
+      let id = e.target.getAttribute('data-id');
+      getCountry(id);
+      $('.sidebar').classList.remove('swipe')
+      $('body').style.overflow = `hidden`;
+   }
+})
+
+
+async function getCountry(country) {
+
+   const response = await fetch(`${baseURL}/name/${country}`);
+   const result = await response.json();
+
+   console.log(result);
+
+   const {
+      name,
+      capital,
+      region,
+      population,
+      flags: {
+         svg
+      },
+      
+   } = result[0];
+
+
+
+
+
+   const row = createElement('div', 'row', `
+   
+   <div class="col-md-4 p-3">
+      <img src="${svg}" alt="rasm" id="img-country" width="320">
+   </div>
+   <div class="col-md-7 p-3">
+      <ul class="list-group">
+         <li class="list-group-item" id="cName">Country: ${name}</li>
+         <li class="list-group-item">Population: ${population}</li>
+         <li class="list-group-item">Region: ${region}</li>
+         <li class="list-group-item">Capital: ${capital}</li>
+   
+      </ul>
+   </div>
+
+   `);
+
+   $('.country-info').appendChild(row);
+
+
+
+}
+
+$('.close').addEventListener('click', () => {
+   $('.sidebar').classList.add('swipe')
+   $('body').style.overflow = `visible`;
 })
